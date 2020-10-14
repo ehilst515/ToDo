@@ -1,25 +1,42 @@
-import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css"
-import Form from "./Form"
-import './List.css';
+import React, { useState } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Form from "./Form";
+import TaskList from "./TaskList";
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
+
+
+const DefaultTasksList = [
+    { assignee: "Kayla", details: "Take dog for a walk", difficulty: 1, complete: false },
+    { assignee: "Enrique", details: "Create new Fitbit watch face", difficulty: 5, complete: true },
+]
 
 export default function () {
-    return (
-        <div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-4">
-                        <Form />
-                    </div>
-                    <div class="col-8">
-                        <h2>Task List</h2>
-                        <ul>
-                            <li class="list-group-item-danger">Take dog for a walk. Difficulty: 1/5</li>
-                            <li class="list-group-item-danger">Create new Fitbit Watch Face. Difficulty: 5/5</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+    const[tasks, setTasks] = useState(DefaultTasksList);
+
+    function SaveTask(task){
+        setTasks([task, ...tasks]);
+    }
+
+    function DeleteTask(idxToRemove){
+        setTasks(tasks.filter((task, idx) => idx !== idxToRemove))
+    }
+
+    return ( 
+        <>
+            <Container>
+                <Row>
+                    <Col md={4}>
+                        <Form onSave={SaveTask} />
+                    </Col>
+                    <Col md={8}>
+                        <TaskList tasks={tasks} onDelete={DeleteTask} />
+                    </Col>
+                </Row>
+            </Container>
+
+        </>
     );
 }
