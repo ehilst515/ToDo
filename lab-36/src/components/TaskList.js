@@ -3,14 +3,14 @@ import Toast from 'react-bootstrap/Toast';
 import Badge from 'react-bootstrap/Badge';
 
 export default function (props) {
-    const { tasks, onDelete } = props;
+    const { tasks, onDelete, onChange } = props;
 
     return (
         <>
             {tasks.map((task, idx) => (
                 <Toast key={idx} onClose={()=> onDelete(idx)}>
                     <Toast.Header className="rounded mr-2">
-                        <Badge pill variant={task.complete ? "success" : "danger"}>
+                        <Badge pill variant={task.complete ? "success" : "danger"} onClick={() => onChange(idx)}>
                             {task.complete ? "Complete" : "Pending"}
                             </Badge>
                             <strong className="ml-1 mr-auto">{task.assignee}</strong>
@@ -23,4 +23,5 @@ export default function (props) {
             ))}
         </>
     );
+
 }
