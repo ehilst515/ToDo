@@ -1,16 +1,32 @@
 import React from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Nav.css';
+import Logout from "./Logout";
+import { useAuth } from '../contexts/auth';
 
 export default function () {
-    return (
-        <nav>
-            <ul>
-                <Route>
+    const { user } = useAuth();
+
+    if (!user) {
+        return (
+            <nav>
+                <ul>
                     <li><NavLink to="/" exact>Home</NavLink></li>
                     <li><NavLink to="/about">About</NavLink></li>
-                </Route>
-            </ul>
-        </nav>
-    );
+                </ul>
+            </nav>
+        );
+    }
+
+    if (user) {
+        return (
+            <nav>
+                <ul>
+                    <li><NavLink to="/" exact>Home</NavLink></li>
+                    <li><NavLink to="/about">About</NavLink></li>
+                    <Logout />
+                </ul>
+            </nav>
+        );
+    }
 }
