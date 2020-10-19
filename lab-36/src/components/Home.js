@@ -5,7 +5,7 @@ import TaskList from "./TaskList";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Login from "./Login";
+import Login from "./auth/Login";
 import { useAuth } from '../contexts/auth';
 
 const DefaultTasksList = [

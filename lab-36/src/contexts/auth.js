@@ -18,15 +18,14 @@ export function AuthProvider(props) {
     })
 
     function setUser(user) {
-        setState(prevState => ({
-            ...prevState,
-            user,
-        }));
-        if (!user) {
-            return false;
-        }
+        user = processToken(user);
 
-        return processToken(user);
+        setState(prevState => ({
+          ...prevState,
+          user,
+        }));
+    
+        return !!user;
     }
 
     async function login(username, password) {

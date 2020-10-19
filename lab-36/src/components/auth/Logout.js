@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from 'react-bootstrap/Button';
-import { useAuth } from '../contexts/auth';
+import { useAuth } from '../../contexts/auth';
 
 export default function Logout(){
     const { logout } = useAuth();

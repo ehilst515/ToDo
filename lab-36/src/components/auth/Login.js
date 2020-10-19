@@ -1,7 +1,7 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useAuth } from '../contexts/auth';
+import { useAuth } from '../../contexts/auth';
 
 export default function Login() {
     const { login } = useAuth();
