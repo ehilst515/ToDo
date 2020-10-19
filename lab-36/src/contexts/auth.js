@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+//import jwt from 'jsonwebtoken';
 
 const userAPI = 'https://deltav-todo.azurewebsites.net/api/v1/Users';
 export const AuthContext = React.createContext();
@@ -21,6 +22,11 @@ export function AuthProvider(props) {
             ...prevState,
             user,
         }));
+        if (!user) {
+            return false;
+        }
+
+        return true; // -> processToken(user);
     }
 
     async function login(username, password) {
@@ -51,3 +57,23 @@ export function AuthProvider(props) {
         </AuthContext.Provider>
     )
 }
+
+// function processToken(user) {
+//     if (!user)
+//       return null;
+
+//     try {
+//       const payload = jwt.decode(user.token);
+//       if (payload){
+//           console.log(payload);
+//         user.permissions = payload.permissions || [];
+//         return user;
+//       }
+
+//       return null;
+//     }
+//     catch (e) {
+//       console.warn(e);
+//       return null;
+//     }
+// }
