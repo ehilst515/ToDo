@@ -1,19 +1,21 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useAuth } from '../contexts/auth';
+import { useAuth } from '../../contexts/auth';
 
 export default function Login() {
     const { login } = useAuth();
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
-
-        const{username, password } = e.target.elements;
-        console.log(username.value);
-
-        login(username.value, password.value);
-
+        const { target } = e;
+    
+        const { username, password } = target.elements;
+    
+        if (!await login(username.value, password.value))
+        {
+          target.reset();
+        }
     }
 
     return (
